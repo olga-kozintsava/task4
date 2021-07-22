@@ -1,0 +1,10 @@
+<VirtualHost *:80>
+    ServerName tudominio.tld
+    ServerAdmin webmaster@localhost
+    DocumentRoot /var/www/html/tu-proyecto/public
+    <Directory /var/www/html/tu-proyecto>
+        AllowOverride All
+    </Directory>
+    ErrorLog ${APACHE_LOG_DIR}/error.log
+    CustomLog ${APACHE_LOG_DIR}/access.log combined
+</VirtualHos
