@@ -14,12 +14,28 @@ class MainPageController extends Controller
         return view('main', ['data' => User::all()]);
     }
 
-    public function delete(Request $request){
+    public function delete(Request $request)
+    {
         $id = $request->id;
         User::whereIn('id', $id)->delete();
-        return response()->json(['code'=>200]);
+        session()->pull('$id');
+        return response()->json(['code' => 200]);
     }
 
+    public function block(Request $request)
+    {
+        $id = $request->id;
+        $users = User::whereIn('id', $id);
+        $users->update(['status' => 'block']);
+        return response()->json(['code' => 200]);
+    }
+
+    public function unblock(Request $request)
+    {
+        $id = $request->id;
+        User::whereIn('id', $id)->update(['status' => 'ok']);
+        return response()->json(['code' => 200]);
+    }
 //    {
 //        $id = $request->id;
 //        $query = User::find($id)->delete();
