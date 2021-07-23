@@ -10,7 +10,6 @@ class MainPageController extends Controller
 {
     public function show()
     {
-
         return view('main', ['data' => User::all()]);
     }
 
@@ -18,7 +17,10 @@ class MainPageController extends Controller
     {
         $id = $request->id;
         User::whereIn('id', $id)->delete();
-        session()->pull('$id');
+        $userSession = session()->get('LoggedUser');
+        if (in_array($userSession, $id)) {
+            session()->pull('LoggedUser');
+        }
         return response()->json(['code' => 200]);
     }
 
@@ -27,6 +29,10 @@ class MainPageController extends Controller
         $id = $request->id;
         $users = User::whereIn('id', $id);
         $users->update(['status' => 'block']);
+        $userSession = session()->get('LoggedUser');
+        if (in_array($userSession, $id)) {
+            session()->pull('LoggedUser');
+        }
         return response()->json(['code' => 200]);
     }
 
@@ -36,14 +42,4 @@ class MainPageController extends Controller
         User::whereIn('id', $id)->update(['status' => 'ok']);
         return response()->json(['code' => 200]);
     }
-//    {
-//        $id = $request->id;
-//        $query = User::find($id)->delete();
-//        if($query){
-//            return response()->json(['code'=>200]);
-//        }else{
-//            return response()->json(['code'=>400]);
-//        }
-//    }
-
 }

@@ -7,7 +7,6 @@ use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\Validator;
 
 class RegistrationController extends Controller
 {
@@ -35,12 +34,6 @@ class RegistrationController extends Controller
         }else{
             return back()->with('fail', 'fail');
         }
-        //        $user = User::create(request(['name', 'email', 'password']));
-//
-//        auth()->login($user);
-//
-//
-//
-//        return redirect('/');
     }
 }
+

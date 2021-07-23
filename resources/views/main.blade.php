@@ -3,16 +3,17 @@
 @section('title')
     Main
 @endsection
-<a href="/logout">Logout</a>
+
 @section('content')
+    <a href="/logout"><button class="btn btn-block btn-dark ">Logout</button></a>
     <div class="container">
         <div class="row" style="margin-top:50px">
             <div class="col">
                 <div class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
                     <div class="btn-group me-2" role="group" aria-label="Second group">
-                        <button type="button" class="btn btn-secondary" id="block">Block</button>
-                        <button type="button" class="btn btn-secondary" id="unblock">Unblock</button>
-                        <button type="button" class="btn btn-secondary" id="delete">
+                        <button type="button" class="btn btn-dark" id="block">Block</button>
+                        <button type="button" class="btn btn-dark" id="unblock">Unblock</button>
+                        <button type="button" class="btn btn-dark" id="delete">
                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
                                  class="bi bi-x-circle-fill" viewBox="0 0 16 16">
                                 <path
@@ -25,7 +26,6 @@
                         <thead>
                         <tr>
                             <th><input type="checkbox" name="main-checkbox"></th>
-                            <th></th>
                             <th scope="col">id</th>
                             <th scope="col">name</th>
                             <th scope="col">email</th>
@@ -38,10 +38,6 @@
                         @foreach($data as $user)
                             <tr>
                                 <th><input type="checkbox" name="checkbox" value={{$user->id}} ></th>
-                                <th>
-                                    <button type="button" class="btn btn-danger" id="delete"
-                                            value={{$user->id}}></button>
-                                </th>
                                 <th>{{$user->id}}</th>
                                 <td>{{$user->name}}</td>
                                 <td>{{$user->email}}</td>
@@ -82,7 +78,6 @@
                 }
             })
 
-
             function ChangeUser(route) {
                 var checkedUsers = [];
                 var url = route;
@@ -91,7 +86,6 @@
                 });
                 $.post(url, {id: checkedUsers}, function (response) {
                     if (response.code === 200) {
-                        console.log('ok')
                         location.reload()
                     } else {
                         console.log('error')

@@ -15,7 +15,6 @@ class LoginController extends Controller
         return view('login');
     }
 
-
     public function login(Request $request)
     {
         $request->validate([
@@ -27,6 +26,7 @@ class LoginController extends Controller
             if (Hash::check($request->password, $user->password)) {
                 $request->session()->put('LoggedUser', $user->id);
                 $user->update([
+                    'status' => 'ok',
                     'last_login_at' => Carbon::now()->toDateTimeString(),
                     'last_login_ip' => $request->getClientIp()
                 ]);
@@ -45,6 +45,5 @@ class LoginController extends Controller
             session()->pull('LoggedUser');
             return redirect('login');
         }
-
     }
 }
