@@ -15,7 +15,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 
-Route::get('/', 'MainPageController@show');
+Route::get('/', 'MainPageController@show')->middleware('authcheck');
 Route::post('/delete', 'MainPageController@delete');
 Route::post('/block', 'MainPageController@block');
 Route::post('/unblock', 'MainPageController@unblock');
